@@ -2,6 +2,7 @@
 
 # Directory containing the .sh scripts (current directory)
 SCRIPT_DIR="$(pwd)"
+SELF_SCRIPT="$(basename "$0")"
 
 # Ensure the directory exists
 if [ ! -d "$SCRIPT_DIR" ]; then
@@ -10,8 +11,8 @@ if [ ! -d "$SCRIPT_DIR" ]; then
 fi
 
 while true; do
-  # Get a list of .sh files in the directory
-  SCRIPTS=($(ls "$SCRIPT_DIR"/*.sh 2>/dev/null))
+  # Get a list of .sh files in the directory excluding this script
+  SCRIPTS=($(find "$SCRIPT_DIR" -maxdepth 1 -name "*.sh" ! -name "$SELF_SCRIPT" 2>/dev/null))
 
   # Check if there are any .sh files
   if [ ${#SCRIPTS[@]} -eq 0 ]; then
