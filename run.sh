@@ -11,8 +11,8 @@ if [ ! -d "$SCRIPT_DIR" ]; then
 fi
 
 while true; do
-  # Get a list of .sh files in the directory excluding this script
-  SCRIPTS=($(find "$SCRIPT_DIR" -maxdepth 1 -name "*.sh" ! -name "$SELF_SCRIPT" 2>/dev/null))
+  # Get a list of .sh files in the directory excluding this script and sort them alphabetically
+  SCRIPTS=($(find "$SCRIPT_DIR" -maxdepth 1 -name "*.sh" ! -name "$SELF_SCRIPT" -exec basename {} \; | sort))
 
   # Check if there are any .sh files
   if [ ${#SCRIPTS[@]} -eq 0 ]; then
@@ -23,8 +23,7 @@ while true; do
   # Display the list of scripts
   echo "Available scripts:"
   for i in "${!SCRIPTS[@]}"; do
-    script_name=$(basename "${SCRIPTS[$i]}")
-    echo "$((i+1)). $script_name"
+    echo "$((i+1)). ${SCRIPTS[$i]}"
   done
   echo "$(( ${#SCRIPTS[@]} + 1 )). Exit"
 
@@ -48,8 +47,8 @@ while true; do
 
   # Run the selected script
   echo "Running $SELECTED_SCRIPT..."
-  chmod +x "$SELECTED_SCRIPT"
-  "$SELECTED_SCRIPT"
+  chmod +x "$SCRIPT_DIR/$SELECTED_SCRIPT"
+  "$SCRIPT_DIR/$SELECTED_SCRIPT"
 
   # Pause before showing the menu again
   read -p "Press any key to continue..."
