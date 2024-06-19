@@ -5,6 +5,7 @@ LOG_FILE="/var/log/system_performance.log"
 
 # Log system performance data
 echo "Logging system performance data..."
+echo LOG_FILE
 while true; do
   echo "Timestamp: $(date)" >> $LOG_FILE
   echo "CPU Usage:" >> $LOG_FILE
