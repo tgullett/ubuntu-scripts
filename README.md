@@ -4,8 +4,14 @@ This is a bunch of different bash scripts for Ubunut Servers
 
 ## Features
 
-- Netplan Interactive Configuration
-- 
+- backup_directory.sh
+- netplan-config.sh - Netplan Interactive Configuration
+- system_diskchk.sh
+- system_monitor.sh
+- system_rotate_logfile.sh
+- system_servicechk.sh
+- system_update_security.sh
+- system_update_upgrade.sh
 
 
 ## Installation & Run
